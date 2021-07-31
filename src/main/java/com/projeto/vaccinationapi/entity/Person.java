@@ -31,9 +31,11 @@ public class Person {
 
     private LocalDate birthDate;
 
+    private LocalDate scheduledDate;
+
     @OneToOne(fetch = FetchType.LAZY, // o LAZY é para deixar a consulta mais rapida
     cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}) // o cascade permite adicionar o telefone já na criação da pessoa, como se um fosse o pai do outro
-    private Address adress;
+    private Address address;
 
     @OneToMany(fetch = FetchType.LAZY, // o LAZY é para deixar a consulta mais rapida
                 cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}) // o cascade permite adicionar o telefone já na criação da pessoa, como se um fosse o pai do outro
