@@ -33,7 +33,13 @@ public class VaccinationController { // essa classe serve só para ser uma porta
     }
 
     @GetMapping("/{id}") // mapeando o get, mas esperando através do requerimento o id no endereço
-    public PersonDTO findById (@PathVariable Long id) throws PersonNotFoundException { // indica que o parametro está na requisição
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException { // indica que o parametro está na requisição
         return personService.findById(id); // chamando o método na classe PersonService
+    }
+
+    @DeleteMapping("/{id}") // mapeando a solicitação de delete
+    @ResponseStatus(HttpStatus.NO_CONTENT) // ira responder com o codigo Http para não existe conteudo
+    public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
+        personService.delete(id);
     }
 }

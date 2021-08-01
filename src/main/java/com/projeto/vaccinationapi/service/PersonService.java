@@ -41,10 +41,18 @@ public class PersonService {
                 .collect(Collectors.toList()); // passando todos os dados para uma list
     }
 
+    private Person verifyIfExists(Long id) throws PersonNotFoundException {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id)); // o Optional tem uma classe que faz uma comparação e se não for valida ela faz um up de uma exceção
+    }
+
     public PersonDTO findById(Long id) throws PersonNotFoundException {
-        //Optional<Person> optionalPerson = personRepository.findById(id); // a interface Repository tem um método que pesquise dado através do id
-        Person person = personRepository.findById(id)
-                .orElseThrow(() -> new PersonNotFoundException(id));
+        Person person = verifyIfExists(id);
         return personMapper.toDTO(person); // pedindo pro PersonMapper converter para um PersonDTO
+    }
+
+    public void delete(Long id) throws PersonNotFoundException {
+        verifyIfExists(id); // manda o metodo desta classe ver se existe o id
+        personRepository.deleteById(id);
     }
 }
