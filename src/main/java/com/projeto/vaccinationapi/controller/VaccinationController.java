@@ -37,6 +37,11 @@ public class VaccinationController { // essa classe serve só para ser uma porta
         return personService.findById(id); // chamando o método na classe PersonService
     }
 
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id, @Valid @RequestBody PersonDTO personDTO) throws PersonNotFoundException {
+        return personService.updateById(id, personDTO);
+    }
+
     @DeleteMapping("/{id}") // mapeando a solicitação de delete
     @ResponseStatus(HttpStatus.NO_CONTENT) // ira responder com o codigo Http para não existe conteudo
     public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
