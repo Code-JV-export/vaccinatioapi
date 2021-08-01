@@ -16,7 +16,7 @@ public class Address {
 
     @Id // para ter uma classe "Entity" deve se ter um ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) // define qual é a estrategia de geração deste ID. O escolhido foi o que incrementa a cada novo dado
-    private long id;
+    private Long id;
 
     @Column(nullable = false) // obriga a este dado ser obrigatorio
     private String street;

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class AddressDTO {
 
-    private long id;
+    private Long id;
 
     @NotEmpty
     private String street;

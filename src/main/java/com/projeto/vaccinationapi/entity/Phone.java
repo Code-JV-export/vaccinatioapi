@@ -17,7 +17,7 @@ public class Phone {
 
     @Id // para ter uma classe "Entity" deve se ter um ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) // define qual é a estrategia de geração deste ID. O escolhido foi o que incrementa a cada novo dado
-    private long id;
+    private Long id;
 
     @Enumerated(EnumType.STRING) // informando que este dado é um Enum do tipo String
     @Column(nullable = false) // obriga a este dado ser obrigatorio

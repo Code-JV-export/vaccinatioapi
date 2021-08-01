@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -36,10 +37,10 @@ public class PersonDTO {
     private String scheduledDate;
 
     @Valid // manda verifica todos os dados da classe AddressDTO que já está com as anotações
-    @NotEmpty
+    @NotNull
     private AddressDTO address;
 
     @Valid
-    @NotEmpty
+    @NotNull
     private List<PhoneDTO> phones;
 }
