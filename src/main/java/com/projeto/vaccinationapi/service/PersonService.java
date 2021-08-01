@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,11 +26,7 @@ public class PersonService {
         Person personToSave = personMapper.toModel(personDTO);
 
         Person savePerson = personRepository.save(personToSave);// salva os dados passado através do Post
-        return MessageResponseDTO
-                .builder()
-                .message("Person registered for vaccination: " + savePerson.getFirstName() +
-                        " in day: " + savePerson.getScheduledDate())
-                .build();
+        return createMessageResponse(savePerson, "Person registered for vaccination: ", " in day: ");
     }
 
     public List<PersonDTO> listAll() { // listar todas as pessoas
@@ -39,11 +34,6 @@ public class PersonService {
         return allPeople.stream() // utilizando o serviços do stream
                 .map(personMapper::toDTO) // pede para o personMapper transformar cada Person em PersonDTO
                 .collect(Collectors.toList()); // passando todos os dados para uma list
-    }
-
-    private Person verifyIfExists(Long id) throws PersonNotFoundException {
-        return personRepository.findById(id)
-                .orElseThrow(() -> new PersonNotFoundException(id)); // o Optional tem uma classe que faz uma comparação e se não for valida ela faz um up de uma exceção
     }
 
     public PersonDTO findById(Long id) throws PersonNotFoundException {
@@ -54,5 +44,27 @@ public class PersonService {
     public void delete(Long id) throws PersonNotFoundException {
         verifyIfExists(id); // manda o metodo desta classe ver se existe o id
         personRepository.deleteById(id);
+    }
+
+    public MessageResponseDTO updateById(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+        verifyIfExists(id);
+
+        Person personToUpdate = personMapper.toModel(personDTO);
+
+        Person updatedPerson = personRepository.save(personToUpdate);// salva os dados passado através do Post
+        return createMessageResponse(updatedPerson, "Update person and date of vaccination: ", " for the day: ");
+    }
+
+    private Person verifyIfExists(Long id) throws PersonNotFoundException {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id)); // o Optional tem uma classe que faz uma comparação e se não for valida ela faz um up de uma exceção
+    }
+
+    private MessageResponseDTO createMessageResponse(Person savePerson, String message, String message2) {
+        return MessageResponseDTO
+                .builder()
+                .message(message + savePerson.getFirstName() +
+                        message2 + savePerson.getScheduledDate())
+                .build();
     }
 }
