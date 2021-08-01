@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController // informando que é um controlador que será acessada por uma requisição rest
 @RequestMapping("/api/v1/register") // informa qual é o caminho principal de entrada da API
@@ -23,5 +24,10 @@ public class VaccinationController { // essa classe serve só para ser uma porta
     // o @Valid manda o validation verificar cada um dos atributos
     public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) { // o parametro é do tipo pessoa, pois já ira criar uma instacia do tipo person
         return personService.createPerson(personDTO);
+    }
+
+    @GetMapping
+    public List<PersonDTO> listAll() {
+        return personService.listAll();
     }
 }
