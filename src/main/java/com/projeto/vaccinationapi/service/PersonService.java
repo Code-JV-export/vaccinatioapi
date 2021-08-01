@@ -3,6 +3,7 @@ package com.projeto.vaccinationapi.service;
 import com.projeto.vaccinationapi.dto.MessageResponseDTO;
 import com.projeto.vaccinationapi.dto.request.PersonDTO;
 import com.projeto.vaccinationapi.entity.Person;
+import com.projeto.vaccinationapi.exception.PersonNotFoundException;
 import com.projeto.vaccinationapi.mapper.PersonMapper;
 import com.projeto.vaccinationapi.repository.PersonRepository;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,5 +39,12 @@ public class PersonService {
         return allPeople.stream() // utilizando o serviços do stream
                 .map(personMapper::toDTO) // pede para o personMapper transformar cada Person em PersonDTO
                 .collect(Collectors.toList()); // passando todos os dados para uma list
+    }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        //Optional<Person> optionalPerson = personRepository.findById(id); // a interface Repository tem um método que pesquise dado através do id
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+        return personMapper.toDTO(person); // pedindo pro PersonMapper converter para um PersonDTO
     }
 }

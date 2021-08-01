@@ -2,6 +2,7 @@ package com.projeto.vaccinationapi.controller;
 
 import com.projeto.vaccinationapi.dto.MessageResponseDTO;
 import com.projeto.vaccinationapi.dto.request.PersonDTO;
+import com.projeto.vaccinationapi.exception.PersonNotFoundException;
 import com.projeto.vaccinationapi.service.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,13 @@ public class VaccinationController { // essa classe serve só para ser uma porta
         return personService.createPerson(personDTO);
     }
 
-    @GetMapping
+    @GetMapping // mapeando o get, onde ira retornar uma lista com todas as pessoas salvas
     public List<PersonDTO> listAll() {
-        return personService.listAll();
+        return personService.listAll(); // chamando o método na classe PersonService
+    }
+
+    @GetMapping("/{id}") // mapeando o get, mas esperando através do requerimento o id no endereço
+    public PersonDTO findById (@PathVariable Long id) throws PersonNotFoundException { // indica que o parametro está na requisição
+        return personService.findById(id); // chamando o método na classe PersonService
     }
 }
