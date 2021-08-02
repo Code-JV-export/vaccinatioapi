@@ -34,8 +34,6 @@ public class PersonDTO {
 
     private String birthDate;
 
-    private String scheduledDate;
-
     @Valid // manda verifica todos os dados da classe AddressDTO que já está com as anotações
     @NotNull
     private AddressDTO address;
@@ -43,4 +41,8 @@ public class PersonDTO {
     @Valid
     @NotNull
     private List<PhoneDTO> phones;
+
+    @Valid
+    @NotNull
+    private SchedulingDTO scheduling;
 }

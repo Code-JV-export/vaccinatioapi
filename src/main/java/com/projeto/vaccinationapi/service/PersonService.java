@@ -64,7 +64,7 @@ public class PersonService {
         return MessageResponseDTO
                 .builder()
                 .message(message + savePerson.getFirstName() +
-                        message2 + savePerson.getScheduledDate())
+                        message2 + savePerson.getScheduling().getScheduledDate())
                 .build();
     }
 }

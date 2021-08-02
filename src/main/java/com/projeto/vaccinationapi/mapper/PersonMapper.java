@@ -13,7 +13,7 @@ public interface PersonMapper {
 
     // O @Mapping manda o mapstruct converter o formato String para LocalDate
     @Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd/MM/yyyy")
-    @Mapping(target = "scheduledDate", source = "scheduledDate", dateFormat = "dd/MM/yyyy")
+    @Mapping(target = "scheduling.scheduledDate", source = "scheduling.scheduledDate", dateFormat = "dd/MM/yyyy")
     Person toModel(PersonDTO personDTO);
 
     PersonDTO toDTO(Person person);
