@@ -25,3 +25,6 @@ http://localhost:8080/api/v1/register
 ```
 
 Para melhor experiência do resultado deste projeto, indicamos o uso do Postman, que pode ser obtido clicando [aqui](https://www.postman.com/)
+
+![interface-postman](https://user-images.githubusercontent.com/68514742/127887129-6ccb5d47-9be8-4d26-8594-531272bb770d.jpg)
+<p align="center">Interface do Postman</p>
